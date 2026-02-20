@@ -30,11 +30,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto create(CreateUserDto userDto) {
-        if (userDto.password().length() < minPasswordLength) {
+        if (userDto.getPassword() == null || userDto.getPassword().length() < minPasswordLength) {
             throw new DataValidationException("Password should be more than " + minPasswordLength + " symbols!");
         }
         User user = userMapper.toUser(userDto);
-        Country country = countryRepository.getByIdOrThrow(userDto.countryId());
+        Country country = countryRepository.getByIdOrThrow(userDto.getCountryId());
         user.setCountry(country);
         user = userRepository.save(user);
         log.info("User {} created", user.getId());
@@ -44,13 +44,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto update(long userId, UpdateUserDto userDto) {
         long requesterId = userContext.getUserId();
-        if (userId != requesterId) {
+        if (requesterId != userId) {
             throw new ForbiddenException("User " + requesterId + " doesn't match profile owner!");
         }
         User user = userRepository.getByIdOrThrow(userId);
-        userMapper.update(userDto, user);
-        Country country = countryRepository.getByIdOrThrow(userDto.countryId());
+        Country country = countryRepository.getByIdOrThrow(userDto.getCountryId());
         user.setCountry(country);
+        userMapper.update(userDto, user);
         user = userRepository.save(user);
         log.info("User {} updated", user.getId());
         return userMapper.toUserDto(user);
@@ -61,4 +61,47 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.getByIdOrThrow(userId);
         return userMapper.toUserDto(user);
     }
+
+
+//
+//    @Value("${user.password.min.length}")
+//    private int minPasswordLength;
+//    private final UserRepository userRepository;
+//    private final CountryRepository countryRepository;
+//    private final UserMapper userMapper;
+//    private final UserContext userContext;
+//
+//    @Override
+//    public UserDto create(CreateUserDto userDto) {
+//        if (userDto.password().length() < minPasswordLength) {
+//            throw new DataValidationException("Password should be more than " + minPasswordLength + " symbols!");
+//        }
+//        User user = userMapper.toUser(userDto);
+//        Country country = countryRepository.getByIdOrThrow(userDto.countryId());
+//        user.setCountry(country);
+//        user = userRepository.save(user);
+//        log.info("User {} created", user.getId());
+//        return userMapper.toUserDto(user);
+//    }
+//
+//    @Override
+//    public UserDto update(long userId, UpdateUserDto userDto) {
+//        long requesterId = userContext.getUserId();
+//        if (userId != requesterId) {
+//            throw new ForbiddenException("User " + requesterId + " doesn't match profile owner!");
+//        }
+//        User user = userRepository.getByIdOrThrow(userId);
+//        userMapper.update(userDto, user);
+//        Country country = countryRepository.getByIdOrThrow(userDto.countryId());
+//        user.setCountry(country);
+//        user = userRepository.save(user);
+//        log.info("User {} updated", user.getId());
+//        return userMapper.toUserDto(user);
+//    }
+//
+//    @Override
+//    public UserDto getById(long userId) {
+//        User user = userRepository.getByIdOrThrow(userId);
+//        return userMapper.toUserDto(user);
+//    }
 }

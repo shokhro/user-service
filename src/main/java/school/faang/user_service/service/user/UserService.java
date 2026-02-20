@@ -26,23 +26,23 @@ public interface UserService {
      */
     UserDto create(CreateUserDto userDto);
 
-    /**
-     * Обновляет информацию о существующем пользователе.
-     * <p>
-     * Условия:
-     * <ul>
-     *     <li>Пользователь с указанным {@code userId} должен существовать —
-     *         иначе выбрасывается {@code EntityNotFoundException}.</li>
-     *     <li>Обновление данных другого пользователя не допускается —
-     *         в этом случае выбрасывается {@code ForbiddenException}.</li>
-     *     <li>Если обновляется email, он должен быть уникальным —
-     *         иначе выбрасывается {@code DataIntegrityViolationException}.</li>
-     * </ul>
-     *
-     * @param userId идентификатор пользователя, чьи данные необходимо обновить
-     * @param userDto объект {@link UpdateUserDto}, содержащий обновлённые данные пользователя
-     * @return объект {@link UserDto}, представляющий обновлённого пользователя
-     */
+//    /**
+//     * Обновляет информацию о существующем пользователе.
+//     * <p>
+//     * Условия:
+//     * <ul>
+//     *     <li>Пользователь с указанным {@code userId} должен существовать —
+//     *         иначе выбрасывается {@code EntityNotFoundException}.</li>
+//     *     <li>Обновление данных другого пользователя не допускается —
+//     *         в этом случае выбрасывается {@code ForbiddenException}.</li>
+//     *     <li>Если обновляется email, он должен быть уникальным —
+//     *         иначе выбрасывается {@code DataIntegrityViolationException}.</li>
+//     * </ul>
+//     *
+//     * @param userId идентификатор пользователя, чьи данные необходимо обновить
+//     * @param userDto объект {@link UpdateUserDto}, содержащий обновлённые данные пользователя
+//     * @return объект {@link UserDto}, представляющий обновлённого пользователя
+//     */
     UserDto update(long userId, UpdateUserDto userDto);
 
     /**
