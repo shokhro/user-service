@@ -1,15 +1,18 @@
 package school.faang.user_service.dto.user;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
 @Getter
 @RequiredArgsConstructor
 public class UpdateUserDto {
-    private final String username;
-    private final String email;
-    private final String phone;
-    private final String aboutMe;
-    private final Long countryId;
-    private final String city;
+    private  String username;
+    private  String email;
+    private  String phone;
+    private  String aboutMe;
+    private  Long countryId;
+    private  String city;
 }

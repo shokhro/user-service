@@ -1,14 +1,19 @@
 package school.faang.user_service.dto.user;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
-@RequiredArgsConstructor
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDto {
-    private final Long id;
-    private final String username;
-    private final String email;
-    private final String phone;
-    private final String aboutMe;
+    private Long id;
+    private String username;
+    private String email;
+    private String phone;
+    private String aboutMe;
 }
