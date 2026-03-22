@@ -16,6 +16,7 @@ public class UserCityFilter implements UserFilter{
 
     @Override
     public Stream<User> apply(Stream<User> users, SearchUserDto searchUserDto) {
-        return users.filter(user -> searchUserDto.getCity().equalsIgnoreCase(user.getCity()));
+        return users.filter(user ->
+                searchUserDto.getCity().equalsIgnoreCase(user.getCity()));
     }
 }

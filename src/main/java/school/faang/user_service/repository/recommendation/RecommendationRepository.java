@@ -31,4 +31,5 @@ public interface RecommendationRepository extends JpaRepository<Recommendation, 
     List<Recommendation> findAllByAuthorId(long authorId);
 
     Optional<Recommendation> findFirstByAuthorIdAndReceiverIdOrderByCreatedAtDesc(long authorId, long receiverId);
+
 }
