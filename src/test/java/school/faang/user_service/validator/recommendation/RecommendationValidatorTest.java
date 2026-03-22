@@ -33,7 +33,7 @@ public class RecommendationValidatorTest {
     }
 
     @Test
-    public void testValidateCreate_WhenAuthorIdAndReceiverIdAreSome_ShouldExceptionThrows(){
+    public void testValidateCreateWhenAuthorIdAndReceiverIdAreSomeShouldExceptionThrows(){
         //arrange
         long authorId = 1L;
         long receiverId = 1L;
@@ -43,7 +43,7 @@ public class RecommendationValidatorTest {
     }
 
     @Test
-    public void testValidateCreate_WhenRecommendationTooEarly_ShouldThrowException(){
+    public void testValidateCreateWhenRecommendationTooEarlyShouldThrowException(){
         //arrange
         long authorId = 2L;
         long receiverId = 1L;
@@ -62,7 +62,7 @@ public class RecommendationValidatorTest {
     }
 
     @Test
-    public void testValidateCreate_WhenSixMonthsPassed_ShouldNotThrowException(){
+    public void testValidateCreateWhenSixMonthsPassedShouldNotThrowException(){
         //arrange
         long authorId = 2L;
         long receiverId = 1L;
@@ -81,7 +81,7 @@ public class RecommendationValidatorTest {
     }
 
     @Test
-    public void testValidateUpdate_WhenCannotUpdateSomeoneElsesRecommendation_ShouldThrowException(){
+    public void testValidateUpdateWhenCannotUpdateSomeoneElsesRecommendationShouldThrowException(){
         Recommendation recommendation = prepareData();
 
         Assertions.assertThrows(DataValidationException.class, () -> {
@@ -90,7 +90,7 @@ public class RecommendationValidatorTest {
     }
 
     @Test
-    public void testValidateUpdate_WhenAuthorUpdatesOwnRecommendation_ShouldNotThrowException(){
+    public void testValidateUpdateWhenAuthorUpdatesOwnRecommendationShouldNotThrowException(){
         Recommendation recommendation = prepareData();
 
         Assertions.assertDoesNotThrow(() -> {
@@ -99,7 +99,7 @@ public class RecommendationValidatorTest {
     }
 
     @Test
-    public void testValidateDelete_WhenCannotDeleteSomeoneElsesRecommendation_ShouldThrowException(){
+    public void testValidateDeleteWhenCannotDeleteSomeoneElsesRecommendationShouldThrowException(){
         Recommendation recommendation = prepareData();
 
         Assertions.assertThrows(DataValidationException.class, () -> {
@@ -108,7 +108,7 @@ public class RecommendationValidatorTest {
     }
 
     @Test
-    public void testValidateDelete_WhenAuthorDeletesOwnRecommendation_ShouldNotThrowException(){
+    public void testValidateDeleteWhenAuthorDeletesOwnRecommendationShouldNotThrowException(){
         Recommendation recommendation = prepareData();
 
         Assertions.assertDoesNotThrow(() -> {

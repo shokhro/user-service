@@ -6,9 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.Spy;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 import school.faang.user_service.dto.user.SearchUserDto;
@@ -62,21 +60,15 @@ public class UserServiceImplTest {
         when(userFilter2.isApplicable(any())).thenReturn(true);
 
         when(userFilter1.apply(any(), any())).
-                thenAnswer(new Answer<Stream<User>>() {
-                    @Override
-                    public Stream<User> answer(InvocationOnMock invocation) throws Throwable {
-                        Stream<User> stream = invocation.getArgument(0);
-                        return stream.filter(user -> user.getExperience().equals(8));
-                    }
+                thenAnswer((Answer<Stream<User>>) invocation -> {
+                    Stream<User> stream = invocation.getArgument(0);
+                    return stream.filter(user -> user.getExperience().equals(8));
                 });
 
         when(userFilter2.apply(any(), any())).
-                thenAnswer(new Answer<Stream<User>>() {
-                    @Override
-                    public Stream<User> answer(InvocationOnMock invocation) throws Throwable {
-                        Stream<User> stream = invocation.getArgument(0);
-                        return stream.filter(user -> user.getCity().equals("Francia"));
-                    }
+                thenAnswer((Answer<Stream<User>>) invocation -> {
+                    Stream<User> stream = invocation.getArgument(0);
+                    return stream.filter(user -> user.getCity().equals("Francia"));
                 });
 
         List<UserDto> users = userService.getUsers(searchUserDto);

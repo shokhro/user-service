@@ -46,29 +46,19 @@ public class SkillServiceImpl implements SkillService{
     public List<SkillCandidateDto> getOfferedSkills(long userId) {
         List<Skill> offeredSkills = skillRepository.findSkillsOfferedToUser(userId);
 
-        List<SkillCandidateDto> result = offeredSkills.stream()
+        return offeredSkills.stream()
                 .map(skill -> {
                     int offersAmount = skillOfferRepository.countAllOffersOfSkill(skill.getId(), userId);
                     SkillDto skillDto = skillMapper.toDto(skill);
                     return new SkillCandidateDto(skillDto, offersAmount);
                 })
                 .collect(Collectors.toList());
-        return result;
     }
 
     @Override
     public void acquireSkillFromOffers(long skillId, long userId) {
-
         skillRepository.assignSkillToUser(skillId, userId);
     }
-
-    //    @Override
-//    @Transactional
-//    public SkillDto create(SkillDto skillDto) {
-//        skillValidator.validateSkillByTitle(skillDto);
-//        Skill skillEntity = skillMapper.toEntity(skillDto);
-//        return skillMapper.toDto(skillRepository.save(skillEntity));
-//    }
 }
 
 

@@ -7,9 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import school.faang.user_service.entity.goal.Goal;
 import school.faang.user_service.repository.goal.GoalRepository;
-import school.faang.user_service.service.goal.GoalService;
 
 @ExtendWith(MockitoExtension.class)
 public class GoalServiceTest {

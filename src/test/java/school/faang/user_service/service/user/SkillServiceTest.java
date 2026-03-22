@@ -17,8 +17,6 @@ import school.faang.user_service.repository.user.SkillRepository;
 import school.faang.user_service.repository.user.UserRepository;
 import school.faang.user_service.service.skill.SkillService;
 
-import java.util.List;
-
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -48,7 +46,7 @@ public class SkillServiceTest {
 //
 //        assertThrows(DataValidationException.class, () -> skillService.create(skillDto));
 //    }
-
+//
 //    @Test
 //    public void testCreateSavesSkill(){
 //        SkillDto skillDto = prepareData(false);

@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface RecommendationService {
 
-    public RecommendationDto create(CreateRecommendationDto recommendationDto);
+    RecommendationDto create(CreateRecommendationDto recommendationDto);
 
-    public RecommendationDto update(Long recommendationId, UpdateRecommendationDto recommendationDto);
+    RecommendationDto update(Long recommendationId, UpdateRecommendationDto recommendationDto);
 
-    public RecommendationDto delete(long recommendationId);
+    RecommendationDto delete(long recommendationId);
 
-    public List<RecommendationDto> getByFilters(RecommendationFilterDto filters);
+    List<RecommendationDto> getByFilters(RecommendationFilterDto filters);
 }

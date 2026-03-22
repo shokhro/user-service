@@ -1,4 +1,12 @@
 package school.faang.user_service.service.mentorship;
 
-public class MentorshipService {
+import school.faang.user_service.dto.user.UserDto;
+
+import java.util.List;
+
+public interface MentorshipService {
+
+    void addMentorship(long mentorId, long menteeId);
+
+    List<UserDto> getMentees(long userId);
 }
