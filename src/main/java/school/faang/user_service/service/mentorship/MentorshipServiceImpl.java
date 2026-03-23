@@ -45,4 +45,14 @@ public class MentorshipServiceImpl implements MentorshipService{
                 .map(userMapper::toUserDto)
                 .toList();
     }
+
+    @Override
+    public List<UserDto> getMentors(long userId) {
+        User mentee = mentorshipRepository.getByIdOrThrow(userId);
+
+        return mentee.getMentors()
+                .stream()
+                .map(userMapper::toUserDto)
+                .toList();
+    }
 }

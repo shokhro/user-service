@@ -9,4 +9,6 @@ public interface MentorshipService {
     void addMentorship(long mentorId, long menteeId);
 
     List<UserDto> getMentees(long userId);
+
+    List<UserDto> getMentors(long userId);
 }

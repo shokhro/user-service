@@ -24,4 +24,9 @@ public class MentorshipController {
     public List<UserDto> getMentees(@PathVariable long userId) {
         return mentorshipService.getMentees(userId);
     }
+
+    @GetMapping("/mentors/{userId}")
+    public List<UserDto> getMentors(@PathVariable long userId) {
+        return mentorshipService.getMentors(userId);
+    }
 }
