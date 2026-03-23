@@ -1,7 +1,5 @@
 package school.faang.user_service.mapper;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import school.faang.user_service.dto.recommendation.CreateRecommendationDto;

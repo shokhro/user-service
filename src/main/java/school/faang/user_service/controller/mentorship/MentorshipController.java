@@ -32,7 +32,7 @@ public class MentorshipController {
 
     @DeleteMapping("/{menteeId}/{mentorId}")
     public void deleteMentorship(@PathVariable long menteeId,
-                                 @PathVariable long mentorId){
+                                 @PathVariable long mentorId) {
         mentorshipService.deleteMentorship(menteeId, mentorId);
     }
 }

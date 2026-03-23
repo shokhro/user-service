@@ -3,9 +3,6 @@ package school.faang.user_service.dto.user;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
 
 @Getter
 @NoArgsConstructor

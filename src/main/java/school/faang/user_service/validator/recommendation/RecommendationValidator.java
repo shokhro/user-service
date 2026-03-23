@@ -18,7 +18,7 @@ public class RecommendationValidator {
     @Value("${recommendation.max-months}")
     private int maxMonths;
 
-    public void validateCreate(Long authorId, Long receiverId){
+    public void validateCreate(Long authorId, Long receiverId) {
         if (authorId.equals(receiverId)) {
             throw new DataValidationException("You cannot recommend yourself");
         }
@@ -36,14 +36,14 @@ public class RecommendationValidator {
                 });
     }
 
-    public void validateUpdate(Recommendation recommendation, Long currentUserId){
-        if (!recommendation.getAuthor().getId().equals(currentUserId)){
+    public void validateUpdate(Recommendation recommendation, Long currentUserId) {
+        if (!recommendation.getAuthor().getId().equals(currentUserId)) {
             throw new DataValidationException("You can only update your own recommendations");
         }
     }
 
-    public void validateDelete(Recommendation recommendation, long contextUserId){
-        if (!recommendation.getAuthor().getId().equals(contextUserId)){
+    public void validateDelete(Recommendation recommendation, long contextUserId) {
+        if (!recommendation.getAuthor().getId().equals(contextUserId)) {
             throw new DataValidationException("You can only delete your own recommendations");
         }
     }

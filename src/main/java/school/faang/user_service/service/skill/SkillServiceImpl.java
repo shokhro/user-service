@@ -15,10 +15,11 @@ import school.faang.user_service.repository.user.SkillRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class SkillServiceImpl implements SkillService{
+public class SkillServiceImpl implements SkillService {
 
     private final SkillRepository skillRepository;
     private final SkillMapper skillMapper;
@@ -27,7 +28,7 @@ public class SkillServiceImpl implements SkillService{
     @Override
     @Transactional
     public SkillDto create(CreateSkillDto skillDto) {
-        if (skillRepository.existsByTitle(skillDto.getTitle())){
+        if (skillRepository.existsByTitle(skillDto.getTitle())) {
             throw new DataValidationException("Skill with title " +
                     skillDto.getTitle() + " already exists");
         }

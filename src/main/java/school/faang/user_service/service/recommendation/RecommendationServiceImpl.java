@@ -87,7 +87,7 @@ public class RecommendationServiceImpl implements RecommendationService {
         log.info("Filtering started | filters={}", filters);
 
         List<Recommendation> recommendations = recommendationRepository.findAll();
-        List<RecommendationDto> result =  recommendations.stream()
+        List<RecommendationDto> result = recommendations.stream()
                 .filter(r -> filters.getAuthorId() == null ||
                         r.getAuthor().getId().equals(filters.getAuthorId()))
                 .filter(r -> filters.getReceiverId() == null ||

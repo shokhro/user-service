@@ -69,11 +69,11 @@ public class UserServiceImpl implements UserService {
         return userMapper.toUserDto(user);
     }
 
-    public List<UserDto> getUsers(SearchUserDto searchUserDto){
+    public List<UserDto> getUsers(SearchUserDto searchUserDto) {
         Stream<User> filteredUsers = userRepository.findAll().stream();
 
-        for (UserFilter userFilter : userFilters){
-            if (userFilter.isApplicable(searchUserDto)){
+        for (UserFilter userFilter : userFilters) {
+            if (userFilter.isApplicable(searchUserDto)) {
                 filteredUsers = userFilter.apply(filteredUsers, searchUserDto);
             }
         }
