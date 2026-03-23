@@ -1,18 +1,27 @@
 package school.faang.user_service.controller.mentorship;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import school.faang.user_service.service.mentorship.MentorshipServiceImpl;
+import org.springframework.web.bind.annotation.*;
+import school.faang.user_service.dto.user.UserDto;
+import school.faang.user_service.service.mentorship.MentorshipService;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/mentorship")
 public class MentorshipController {
 
-    private final MentorshipServiceImpl mentorshipService;
+    private final MentorshipService mentorshipService;
 
-    public void addMentorship(long mentorId, long menteeId) {
+    @PostMapping("/{mentorId}/{menteeId}")
+    public void addMentorship(@PathVariable long mentorId,
+                              @PathVariable long menteeId) {
         mentorshipService.addMentorship(mentorId, menteeId);
+    }
+
+    @GetMapping("/mentees/{userId}")
+    public List<UserDto> getMentees(@PathVariable long userId) {
+        return mentorshipService.getMentees(userId);
     }
 }

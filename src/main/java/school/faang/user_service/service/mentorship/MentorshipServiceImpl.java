@@ -2,20 +2,20 @@ package school.faang.user_service.service.mentorship;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import school.faang.user_service.config.context.UserContext;
 import school.faang.user_service.dto.user.UserDto;
 import school.faang.user_service.entity.user.User;
 import school.faang.user_service.exception.DataValidationException;
+import school.faang.user_service.mapper.UserMapper;
 import school.faang.user_service.repository.mentorship.MentorshipRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class MentorshipServiceImpl implements MentorshipService{
 
     private final MentorshipRepository mentorshipRepository;
+    private final UserMapper userMapper;
 
     @Override
     public void addMentorship(long mentorId, long menteeId) {
@@ -38,6 +38,11 @@ public class MentorshipServiceImpl implements MentorshipService{
 
     @Override
     public List<UserDto> getMentees(long userId) {
-        return null;
+        User mentor = mentorshipRepository.getByIdOrThrow(userId);
+
+        return mentor.getMentees()
+                .stream()
+                .map(userMapper::toUserDto)
+                .toList();
     }
 }
