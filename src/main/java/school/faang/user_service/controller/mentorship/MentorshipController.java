@@ -14,7 +14,7 @@ public class MentorshipController {
 
     private final MentorshipService mentorshipService;
 
-    @PostMapping("/{mentorId}/{menteeId}")
+    @PostMapping("/add/{mentorId}/{menteeId}")
     public void addMentorship(@PathVariable long mentorId,
                               @PathVariable long menteeId) {
         mentorshipService.addMentorship(mentorId, menteeId);
@@ -28,5 +28,11 @@ public class MentorshipController {
     @GetMapping("/mentors/{userId}")
     public List<UserDto> getMentors(@PathVariable long userId) {
         return mentorshipService.getMentors(userId);
+    }
+
+    @DeleteMapping("/{menteeId}/{mentorId}")
+    public void deleteMentorship(@PathVariable long menteeId,
+                                 @PathVariable long mentorId){
+        mentorshipService.deleteMentorship(menteeId, mentorId);
     }
 }

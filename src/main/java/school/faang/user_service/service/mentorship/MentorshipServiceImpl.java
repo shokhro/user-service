@@ -2,11 +2,13 @@ package school.faang.user_service.service.mentorship;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import school.faang.user_service.config.context.UserContext;
 import school.faang.user_service.dto.user.UserDto;
 import school.faang.user_service.entity.user.User;
 import school.faang.user_service.exception.DataValidationException;
 import school.faang.user_service.mapper.UserMapper;
 import school.faang.user_service.repository.mentorship.MentorshipRepository;
+import school.faang.user_service.validator.recommendation.MentorshipValidator;
 
 import java.util.List;
 
@@ -16,6 +18,8 @@ public class MentorshipServiceImpl implements MentorshipService{
 
     private final MentorshipRepository mentorshipRepository;
     private final UserMapper userMapper;
+    private final UserContext userContext;
+    private final MentorshipValidator mentorshipValidator;
 
     @Override
     public void addMentorship(long mentorId, long menteeId) {
@@ -54,5 +58,15 @@ public class MentorshipServiceImpl implements MentorshipService{
                 .stream()
                 .map(userMapper::toUserDto)
                 .toList();
+    }
+
+    @Override
+    public void deleteMentorship(long menteeId, long mentorId) {
+        long currentUserId = userContext.getUserId();
+        mentorshipValidator.validateDelete(menteeId, mentorId, currentUserId);
+
+        User mentee = mentorshipRepository.getByIdOrThrow(menteeId);
+        mentee.getMentors().removeIf(m -> m.getId() == mentorId);
+        mentorshipRepository.save(mentee);
     }
 }
