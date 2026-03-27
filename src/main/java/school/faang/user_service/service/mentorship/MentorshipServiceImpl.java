@@ -8,7 +8,7 @@ import school.faang.user_service.dto.user.UserDto;
 import school.faang.user_service.entity.user.User;
 import school.faang.user_service.mapper.UserMapper;
 import school.faang.user_service.repository.mentorship.MentorshipRepository;
-import school.faang.user_service.validator.recommendation.MentorshipValidator;
+import school.faang.user_service.validator.mentorship.MentorshipValidator;
 
 import java.util.List;
 

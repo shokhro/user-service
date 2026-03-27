@@ -1,4 +1,4 @@
-package school.faang.user_service.validator.recommendation;
+package school.faang.user_service.validator.mentorship;
 
 import org.springframework.stereotype.Component;
 import school.faang.user_service.exception.DataValidationException;
