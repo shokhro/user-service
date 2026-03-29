@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+import school.faang.user_service.exception.DataValidationException;
 import school.faang.user_service.exception.ForbiddenException;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,5 +45,23 @@ public class MentorshipValidatorTest {
         Assertions.assertDoesNotThrow(() ->
                 mentorshipValidator.validateDelete(menteeId, mentorId, currenUserId)
         );
+    }
+
+    @Test
+    public void testValidateAddMentorshipWhenEquals_ShouldThrowsException(){
+        long mentorId = 1L;
+        long menteeId = 1L;
+
+        Assertions.assertThrows(DataValidationException.class, () ->
+                mentorshipValidator.validateAddMentorship(menteeId, mentorId));
+    }
+
+    @Test
+    public void testValidateAddMentorshipWhenNoEquals_ShouldNoThrowsException(){
+        long mentorId = 1L;
+        long menteeId = 2L;
+
+        Assertions.assertDoesNotThrow(() ->
+                mentorshipValidator.validateAddMentorship(menteeId, mentorId));
     }
 }
