@@ -6,15 +6,21 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import school.faang.user_service.config.context.UserContext;
 import school.faang.user_service.dto.user.CreateUserDto;
+import school.faang.user_service.dto.user.SearchUserDto;
 import school.faang.user_service.dto.user.UpdateUserDto;
 import school.faang.user_service.dto.user.UserDto;
 import school.faang.user_service.entity.user.Country;
 import school.faang.user_service.entity.user.User;
 import school.faang.user_service.exception.DataValidationException;
 import school.faang.user_service.exception.ForbiddenException;
+import school.faang.user_service.filter.user.UserFilter;
 import school.faang.user_service.mapper.UserMapper;
 import school.faang.user_service.repository.user.CountryRepository;
 import school.faang.user_service.repository.user.UserRepository;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 @Service
@@ -27,14 +33,15 @@ public class UserServiceImpl implements UserService {
     private final CountryRepository countryRepository;
     private final UserMapper userMapper;
     private final UserContext userContext;
+    private final List<UserFilter> userFilters;
 
     @Override
     public UserDto create(CreateUserDto userDto) {
-        if (userDto.password().length() < minPasswordLength) {
+        if (userDto.getPassword() == null || userDto.getPassword().length() < minPasswordLength) {
             throw new DataValidationException("Password should be more than " + minPasswordLength + " symbols!");
         }
         User user = userMapper.toUser(userDto);
-        Country country = countryRepository.getByIdOrThrow(userDto.countryId());
+        Country country = countryRepository.getByIdOrThrow(userDto.getCountryId());
         user.setCountry(country);
         user = userRepository.save(user);
         log.info("User {} created", user.getId());
@@ -44,13 +51,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto update(long userId, UpdateUserDto userDto) {
         long requesterId = userContext.getUserId();
-        if (userId != requesterId) {
+        if (requesterId != userId) {
             throw new ForbiddenException("User " + requesterId + " doesn't match profile owner!");
         }
         User user = userRepository.getByIdOrThrow(userId);
-        userMapper.update(userDto, user);
-        Country country = countryRepository.getByIdOrThrow(userDto.countryId());
+        Country country = countryRepository.getByIdOrThrow(userDto.getCountryId());
         user.setCountry(country);
+        userMapper.update(userDto, user);
         user = userRepository.save(user);
         log.info("User {} updated", user.getId());
         return userMapper.toUserDto(user);
@@ -60,5 +67,19 @@ public class UserServiceImpl implements UserService {
     public UserDto getById(long userId) {
         User user = userRepository.getByIdOrThrow(userId);
         return userMapper.toUserDto(user);
+    }
+
+    public List<UserDto> getUsers(SearchUserDto searchUserDto) {
+        Stream<User> filteredUsers = userRepository.findAll().stream();
+
+        for (UserFilter userFilter : userFilters) {
+            if (userFilter.isApplicable(searchUserDto)) {
+                filteredUsers = userFilter.apply(filteredUsers, searchUserDto);
+            }
+        }
+
+        return filteredUsers
+                .map(userMapper::toUserDto)
+                .collect(Collectors.toList());
     }
 }
