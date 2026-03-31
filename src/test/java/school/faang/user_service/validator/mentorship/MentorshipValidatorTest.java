@@ -15,18 +15,18 @@ public class MentorshipValidatorTest {
     private MentorshipValidator mentorshipValidator;
 
     @Test
-    public void testValidateDeleteWhenNotMentorOrMentee_ShouldThrowException() {
+    public void testValidateDeleteWhenNotMentorOrMentee_shouldThrowException() {
         long menteeId = 1L;
         long mentorId = 2L;
         long currenUserId = 3L;
 
         Assertions.assertThrows(ForbiddenException.class, () ->
-            mentorshipValidator.validateDelete(menteeId, mentorId, currenUserId)
+                mentorshipValidator.validateDelete(menteeId, mentorId, currenUserId)
         );
     }
 
     @Test
-    public void testValidateDeleteWhenMentor_ShouldNotThrowException() {
+    public void testValidateDeleteWhenMentor_shouldNotThrowException() {
         long menteeId = 1L;
         long mentorId = 2L;
         long currenUserId = 2L;
@@ -37,7 +37,7 @@ public class MentorshipValidatorTest {
     }
 
     @Test
-    public void testValidateDeleteWhenMentee_ShouldNotThrowException() {
+    public void testValidateDeleteWhenMentee_shouldNotThrowException() {
         long menteeId = 1L;
         long mentorId = 2L;
         long currenUserId = 1L;
@@ -48,7 +48,7 @@ public class MentorshipValidatorTest {
     }
 
     @Test
-    public void testValidateAddMentorshipWhenEquals_ShouldThrowsException(){
+    public void testValidateAddMentorshipWhenEquals_shouldThrowsException() {
         long mentorId = 1L;
         long menteeId = 1L;
 
@@ -57,7 +57,7 @@ public class MentorshipValidatorTest {
     }
 
     @Test
-    public void testValidateAddMentorshipWhenNoEquals_ShouldNoThrowsException(){
+    public void testValidateAddMentorshipWhenNoEquals_shouldNoThrowsException() {
         long mentorId = 1L;
         long menteeId = 2L;
 

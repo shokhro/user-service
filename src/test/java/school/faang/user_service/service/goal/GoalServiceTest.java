@@ -19,7 +19,7 @@ public class GoalServiceTest {
     private GoalService goalService;
 
     @Test
-    public void testNullTitleIsInvalid(){
+    public void testNullTitleIsInvalid() {
         Assert.assertThrows(
                 IllegalArgumentException.class,
                 () -> goalService.save(null, "description", null)
@@ -27,7 +27,7 @@ public class GoalServiceTest {
     }
 
     @Test
-    public void testEmptyTitleIsInvalid(){
+    public void testEmptyTitleIsInvalid() {
         Assert.assertThrows(
                 IllegalArgumentException.class,
                 () -> goalService.save("   ", "description", null)
@@ -35,7 +35,7 @@ public class GoalServiceTest {
     }
 
     @Test
-    public void testSavedGoal(){
+    public void testSavedGoal() {
         goalService.save("title", "description", null);
         Mockito.verify(goalRepository, Mockito.times(1))
                 .create("title", "description", null);

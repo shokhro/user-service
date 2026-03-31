@@ -17,3 +17,4 @@ public class GoalService {
         goalRepository.create(title, description, parent);
     }
 }
+

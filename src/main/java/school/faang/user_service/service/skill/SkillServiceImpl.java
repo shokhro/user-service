@@ -29,8 +29,8 @@ public class SkillServiceImpl implements SkillService {
     @Transactional
     public SkillDto create(CreateSkillDto skillDto) {
         if (skillRepository.existsByTitle(skillDto.getTitle())) {
-            throw new DataValidationException("Skill with title " +
-                    skillDto.getTitle() + " already exists");
+            throw new DataValidationException("Skill with title "
+                    + skillDto.getTitle() + " already exists");
         }
         Skill skillEntity = skillMapper.toEntity(skillDto);
         log.info("Skill created" + skillEntity.getTitle());

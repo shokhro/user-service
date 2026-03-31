@@ -13,27 +13,30 @@ public class UserCityFilterTest {
     private final UserCityFilter userCityFilter = new UserCityFilter();
 
     @Test
-    public void testIsApplicable_WhenCorrectData_ShouldReturnBoolean(){
+    public void testIsApplicable_whenCorrectDataShouldReturnBoolean() {
         SearchUserDto searchUserDto = new SearchUserDto();
         searchUserDto.setCity("Tashkent");
         boolean result = userCityFilter.isApplicable(searchUserDto);
         Assertions.assertTrue(result);
     }
+
     @Test
-    public void testIsApplicable_WhenCityIsNull_ShouldReturnFalse(){
+    public void testIsApplicable_whenCityIsNullShouldReturnFalse() {
         SearchUserDto searchUserDto = new SearchUserDto();
         boolean result = userCityFilter.isApplicable(searchUserDto);
         Assertions.assertFalse(result);
     }
+
     @Test
-    public void testIsApplicable_WhenEmptyCityIsBlank_ShouldReturnFalse(){
+    public void testIsApplicable_whenEmptyCityIsBlankShouldReturnFalse() {
         SearchUserDto searchUserDto = new SearchUserDto();
         searchUserDto.setCity("");
         boolean result = userCityFilter.isApplicable(searchUserDto);
         Assertions.assertTrue(result);
     }
+
     @Test
-    public void testApply_WhenCityMatches_ShouldReturnFilteredUsers(){
+    public void testApply_whenCityMatchesShouldReturnFilteredUsers() {
         //Arrange
         SearchUserDto searchUserDto = new SearchUserDto();
         searchUserDto.setCity("Mexico");
@@ -49,8 +52,9 @@ public class UserCityFilterTest {
         Assertions.assertEquals(1, result.size());
         Assertions.assertEquals("Mexico", result.get(0).getCity());
     }
+
     @Test
-    public void testApply_WhenCityNoMatches_ShouldReturnEmptyList() {
+    public void testApply_whenCityNoMatchesShouldReturnEmptyList() {
         //Arrange
         SearchUserDto searchUserDto = new SearchUserDto();
         searchUserDto.setCity("China");
@@ -65,31 +69,6 @@ public class UserCityFilterTest {
         Assertions.assertNotNull(result);
         Assertions.assertTrue(result.isEmpty());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

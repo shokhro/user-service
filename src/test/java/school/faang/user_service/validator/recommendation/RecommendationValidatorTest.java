@@ -33,7 +33,7 @@ public class RecommendationValidatorTest {
     }
 
     @Test
-    public void testValidateCreateWhenAuthorIdAndReceiverIdAreSomeShouldExceptionThrows(){
+    public void testValidateCreateWhenAuthorIdAndReceiverIdAreSomeShouldExceptionThrows() {
         //arrange
         long authorId = 1L;
         long receiverId = 1L;
@@ -43,7 +43,7 @@ public class RecommendationValidatorTest {
     }
 
     @Test
-    public void testValidateCreateWhenRecommendationTooEarlyShouldThrowException(){
+    public void testValidateCreateWhenRecommendationTooEarlyShouldThrowException() {
         //arrange
         long authorId = 2L;
         long receiverId = 1L;
@@ -52,7 +52,7 @@ public class RecommendationValidatorTest {
         recommendation.setCreatedAt(LocalDateTime.now().minusMonths(2));
 
         Mockito.when(recommendationRepository
-                .findFirstByAuthorIdAndReceiverIdOrderByCreatedAtDesc(authorId, receiverId))
+                        .findFirstByAuthorIdAndReceiverIdOrderByCreatedAtDesc(authorId, receiverId))
                 .thenReturn(Optional.of(recommendation));
 
         //act and assert
@@ -62,7 +62,7 @@ public class RecommendationValidatorTest {
     }
 
     @Test
-    public void testValidateCreateWhenSixMonthsPassedShouldNotThrowException(){
+    public void testValidateCreateWhenSixMonthsPassedShouldNotThrowException() {
         //arrange
         long authorId = 2L;
         long receiverId = 1L;
@@ -81,7 +81,7 @@ public class RecommendationValidatorTest {
     }
 
     @Test
-    public void testValidateUpdateWhenCannotUpdateSomeoneElsesRecommendationShouldThrowException(){
+    public void testValidateUpdateWhenCannotUpdateSomeoneElsesRecommendationShouldThrowException() {
         Recommendation recommendation = prepareData();
 
         Assertions.assertThrows(DataValidationException.class, () -> {
@@ -90,7 +90,7 @@ public class RecommendationValidatorTest {
     }
 
     @Test
-    public void testValidateUpdateWhenAuthorUpdatesOwnRecommendationShouldNotThrowException(){
+    public void testValidateUpdateWhenAuthorUpdatesOwnRecommendationShouldNotThrowException() {
         Recommendation recommendation = prepareData();
 
         Assertions.assertDoesNotThrow(() -> {
@@ -99,7 +99,7 @@ public class RecommendationValidatorTest {
     }
 
     @Test
-    public void testValidateDeleteWhenCannotDeleteSomeoneElsesRecommendationShouldThrowException(){
+    public void testValidateDeleteWhenCannotDeleteSomeoneElsesRecommendationShouldThrowException() {
         Recommendation recommendation = prepareData();
 
         Assertions.assertThrows(DataValidationException.class, () -> {
@@ -108,7 +108,7 @@ public class RecommendationValidatorTest {
     }
 
     @Test
-    public void testValidateDeleteWhenAuthorDeletesOwnRecommendationShouldNotThrowException(){
+    public void testValidateDeleteWhenAuthorDeletesOwnRecommendationShouldNotThrowException() {
         Recommendation recommendation = prepareData();
 
         Assertions.assertDoesNotThrow(() -> {
@@ -116,7 +116,7 @@ public class RecommendationValidatorTest {
         });
     }
 
-    private Recommendation prepareData(){
+    private Recommendation prepareData() {
         User user = new User();
         user.setId(1L);
         Recommendation recommendation = new Recommendation();

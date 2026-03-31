@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import school.faang.user_service.config.context.UserContext;
 import school.faang.user_service.dto.recommendation.CreateRecommendationDto;
@@ -19,6 +18,10 @@ import school.faang.user_service.repository.user.UserRepository;
 import school.faang.user_service.validator.recommendation.RecommendationValidator;
 
 import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class RecommendationServiceImplTest {
@@ -38,7 +41,7 @@ public class RecommendationServiceImplTest {
     private UserContext userContext;
 
     @Test
-    public void testCreate_WhenValidData_ShouldReturnRecommendationDto(){
+    public void testCreate_whenValidDataShouldReturnRecommendationDto() {
         CreateRecommendationDto createRecommendationDto = new CreateRecommendationDto();
         createRecommendationDto.setReceiverId(1L);
         when(userContext.getUserId()).thenReturn(2L);
@@ -47,14 +50,11 @@ public class RecommendationServiceImplTest {
         author.setId(2L);
         User receiver = new User();
         receiver.setId(1L);
-        when(userRepository.findById(2L))
-                .thenReturn(Optional.of(author));
-        when(userRepository.findById(1L))
-                .thenReturn(Optional.of(receiver));
+        when(userRepository.findById(2L)).thenReturn(Optional.of(author));
+        when(userRepository.findById(1L)).thenReturn(Optional.of(receiver));
 
         Recommendation recommendation = new Recommendation();
-        when(recommendationMapper.toRecommendation(createRecommendationDto))
-                .thenReturn(recommendation);
+        when(recommendationMapper.toRecommendation(createRecommendationDto)).thenReturn(recommendation);
 
         Recommendation savedRecommendation = new Recommendation();
         savedRecommendation.setId(1L);
@@ -73,7 +73,7 @@ public class RecommendationServiceImplTest {
     }
 
     @Test
-    public void testUpdate_WhenValidData_ShouldReturnRecommendationDto(){
+    public void testUpdate_whenValidDataShouldReturnRecommendationDto() {
         UpdateRecommendationDto updateRecommendationDto = new UpdateRecommendationDto();
         updateRecommendationDto.setContent("Yaxshi rassom");
         long recommendationId = 1L;
@@ -81,19 +81,16 @@ public class RecommendationServiceImplTest {
         when(userContext.getUserId()).thenReturn(2L);
 
         Recommendation recommendation = new Recommendation();
-        when(recommendationRepository.findById(recommendationId))
-                .thenReturn(Optional.of(recommendation));
+        when(recommendationRepository.findById(recommendationId)).thenReturn(Optional.of(recommendation));
 
         Recommendation savedRecommendation = new Recommendation();
         savedRecommendation.setContent("Yaxshi dasturchi");
         savedRecommendation.setId(1L);
 
-        when(recommendationRepository.save(recommendation))
-                .thenReturn(savedRecommendation);
+        when(recommendationRepository.save(recommendation)).thenReturn(savedRecommendation);
 
         RecommendationDto recommendationDto = new RecommendationDto();
-        when(recommendationMapper.toRecommendationDto(savedRecommendation))
-                .thenReturn(recommendationDto);
+        when(recommendationMapper.toRecommendationDto(savedRecommendation)).thenReturn(recommendationDto);
 
         RecommendationDto result = recommendationService.update(1L, updateRecommendationDto);
 
@@ -104,20 +101,18 @@ public class RecommendationServiceImplTest {
     }
 
     @Test
-    public void testDelete_WhenValidData_ShouldReturnRecommendationDto(){
+    public void testDelete_whenValidDataShouldReturnRecommendationDto() {
         //Arrange
         when(userContext.getUserId()).thenReturn(1L);
 
         Recommendation recommendation = new Recommendation();
         recommendation.setId(1L);
         long recommendationId = recommendation.getId();
-        when(recommendationRepository.findById(recommendationId))
-                .thenReturn(Optional.of(recommendation));
+        when(recommendationRepository.findById(recommendationId)).thenReturn(Optional.of(recommendation));
 
         RecommendationDto recommendationDto = new RecommendationDto();
         recommendationDto.setId(1L);
-        when(recommendationMapper.toRecommendationDto(recommendation))
-                .thenReturn(recommendationDto);
+        when(recommendationMapper.toRecommendationDto(recommendation)).thenReturn(recommendationDto);
 
         //Act
         RecommendationDto result = recommendationService.delete(recommendationId);

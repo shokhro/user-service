@@ -59,14 +59,14 @@ public class UserServiceImplTest {
         when(userFilter1.isApplicable(any())).thenReturn(true);
         when(userFilter2.isApplicable(any())).thenReturn(true);
 
-        when(userFilter1.apply(any(), any())).
-                thenAnswer((Answer<Stream<User>>) invocation -> {
+        when(userFilter1.apply(any(), any()))
+                .thenAnswer((Answer<Stream<User>>) invocation -> {
                     Stream<User> stream = invocation.getArgument(0);
                     return stream.filter(user -> user.getExperience().equals(8));
                 });
 
-        when(userFilter2.apply(any(), any())).
-                thenAnswer((Answer<Stream<User>>) invocation -> {
+        when(userFilter2.apply(any(), any()))
+                .thenAnswer((Answer<Stream<User>>) invocation -> {
                     Stream<User> stream = invocation.getArgument(0);
                     return stream.filter(user -> user.getCity().equals("Francia"));
                 });

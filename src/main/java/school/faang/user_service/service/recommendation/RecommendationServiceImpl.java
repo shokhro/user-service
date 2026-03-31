@@ -88,12 +88,12 @@ public class RecommendationServiceImpl implements RecommendationService {
 
         List<Recommendation> recommendations = recommendationRepository.findAll();
         List<RecommendationDto> result = recommendations.stream()
-                .filter(r -> filters.getAuthorId() == null ||
-                        r.getAuthor().getId().equals(filters.getAuthorId()))
-                .filter(r -> filters.getReceiverId() == null ||
-                        r.getReceiver().getId().equals(filters.getReceiverId()))
-                .filter(r -> filters.getContentContains() == null ||
-                        r.getContent().contains(filters.getContentContains()))
+                .filter(r -> filters.getAuthorId() == null
+                        || r.getAuthor().getId().equals(filters.getAuthorId()))
+                .filter(r -> filters.getReceiverId() == null
+                        || r.getReceiver().getId().equals(filters.getReceiverId()))
+                .filter(r -> filters.getContentContains() == null
+                        || r.getContent().contains(filters.getContentContains()))
                 .map(recommendationMapper::toRecommendationDto)
                 .toList();
 

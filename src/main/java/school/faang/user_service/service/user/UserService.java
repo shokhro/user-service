@@ -9,7 +9,6 @@ import school.faang.user_service.dto.user.UserDto;
  * Предоставляет методы для создания, обновления и получения информации о пользователях.
  */
 public interface UserService {
-
     /**
      * Создаёт нового пользователя на основе переданных данных.
      * <p>
@@ -26,7 +25,7 @@ public interface UserService {
      */
     UserDto create(CreateUserDto userDto);
 
-//    /**
+    //    /**
 //     * Обновляет информацию о существующем пользователе.
 //     * <p>
 //     * Условия:
