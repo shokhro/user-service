@@ -20,8 +20,8 @@ import school.faang.user_service.validator.recommendation.RecommendationValidato
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class RecommendationServiceImplTest {
