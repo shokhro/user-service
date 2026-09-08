@@ -1,8 +1,6 @@
-package school.faang.user_service.dto.recommendation;
-
+package school.faang.user_service.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,11 +11,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateRecommendationDto {
-
-    private Long receiverId;
-
-    @Size(max = 256, message = "Belgilar soni 256 tadan oshmasligi kerak")
+public class RejectionDto {
+    @Size(max = 256, message = "Belgilar soni 256tadan oshmasligi kerak")
     @NotBlank
-    private String content;
+    private String reason;
 }

@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/mentorship")
+@RequestMapping("/api/v1/mentorship")
 public class MentorshipController {
 
     private final MentorshipService mentorshipService;

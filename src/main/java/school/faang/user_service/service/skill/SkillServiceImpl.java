@@ -28,12 +28,13 @@ public class SkillServiceImpl implements SkillService {
     @Override
     @Transactional
     public SkillDto create(CreateSkillDto skillDto) {
+        log.info("skill saqlash ushun, oldin borligi tekshirilmoqda: title={}", skillDto.getTitle());
         if (skillRepository.existsByTitle(skillDto.getTitle())) {
             throw new DataValidationException("Skill with title "
                     + skillDto.getTitle() + " already exists");
         }
         Skill skillEntity = skillMapper.toEntity(skillDto);
-        log.info("Skill created" + skillEntity.getTitle());
+        log.info("Skill created: title={}", skillDto.getTitle());
         return skillMapper.toDto(skillRepository.save(skillEntity));
     }
 

@@ -3,6 +3,7 @@ package school.faang.user_service.repository.mentorship;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import school.faang.user_service.entity.user.MentorshipRequest;
+import school.faang.user_service.exception.EntityNotFoundException;
 
 import java.util.Optional;
 
@@ -22,4 +23,7 @@ public interface MentorshipRequestRepository extends JpaRepository<MentorshipReq
             LIMIT 1
             """)
     Optional<MentorshipRequest> findLatestRequest(long requesterId, long receiverId);
+
+
+
 }
