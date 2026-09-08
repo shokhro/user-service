@@ -1,7 +1,6 @@
 package school.faang.user_service.service.mentorship;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import school.faang.user_service.config.context.UserContext;
 import school.faang.user_service.dto.mentorship.CreateMentorshipRequestDto;
